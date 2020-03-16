@@ -1,15 +1,17 @@
-import React, { Fragment } from "react";
-import { List, DeleteButton } from "../styles/components.style";
+import React, { Fragment, useContext } from "react";
+import Transaction from "./Transaction";
+import { List } from "../styles/components.style";
+import { GlobalContext } from "../context/GlobalState";
 
 const TransactionList = () => {
+  const { transactions } = useContext(GlobalContext);
   return (
     <Fragment>
       <h3>History</h3>
       <List id="list" className="list">
-        <li className="minus">
-          Cash <span>-$400</span>
-          <DeleteButton> x </DeleteButton>
-        </li>
+        {transactions.map(transaction => (
+          <Transaction key={transaction.id} transaction={transaction} />
+        ))}
       </List>
     </Fragment>
   );
